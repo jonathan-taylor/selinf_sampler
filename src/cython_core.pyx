@@ -6,9 +6,9 @@ from scipy.stats import qmc
 from libc.math cimport exp, sqrt
 
 DTYPE_float = float
-ctypedef np.float_t DTYPE_float_t
+ctypedef np.float64_t DTYPE_float_t
 DTYPE_int = int
-ctypedef np.int_t DTYPE_int_t
+ctypedef np.int64_t DTYPE_int_t
 ctypedef np.intp_t DTYPE_intp_t
 
 cdef double MACHINE_EPS = np.finfo(float).eps
@@ -157,7 +157,7 @@ def joint_cdf_bivnormal(double h,
     if rho == -1:
         return (ph + pk - 1) * (h + k >= 0)
     if h == k == 0:
-        return .25 + np.arcsin(rho / (2 * PI))
+        return .25 + np.arcsin(rho) / (2 * PI)
 
     cdef double rho2 = sqrt(1 - rho**2)
     if h * k > 0:
